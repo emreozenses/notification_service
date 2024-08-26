@@ -1,14 +1,10 @@
 package com.tiga.notification_service.service;
 
-import com.tiga.notification_service.converter.DtoConverter;
-import com.tiga.notification_service.dto.PatientQueryResponse;
 import com.tiga.notification_service.entity.Patient;
 import com.tiga.notification_service.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.Period;
 import java.util.List;
 
 @Service
@@ -50,4 +46,11 @@ public class PatientServiceImpl implements PatientService{
     public void deleteDuplicatePatient() {
         patientRepository.deleteDuplicatePatient();
     }
+
+    @Override
+    public List<Patient> findMaleAndNotificationEMAIL() {
+        return patientRepository.findMaleAndNotificationEMAIL();
+    }
+
+
 }

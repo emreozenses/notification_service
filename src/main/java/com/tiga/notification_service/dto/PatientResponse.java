@@ -5,8 +5,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-public class User {
-    private int id;
+@AllArgsConstructor
+@NoArgsConstructor
+public class PatientResponse {
     private String firstName;
-    private String lastName;
+    private String surname;
+    private String email;
 }

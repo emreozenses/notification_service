@@ -1,10 +1,14 @@
 package com.tiga.notification_service.service;
 
+import com.tiga.notification_service.dto.EmailDetailDto;
+import com.tiga.notification_service.entity.Patient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import java.util.Map;
 
 @Service
 public class RabbitMQProducer {
@@ -15,19 +19,29 @@ public class RabbitMQProducer {
     @Value("${rabbitmq.routing.key}")
     private String routingKey;
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(RabbitMQProducer.class);
+
     private RabbitTemplate rabbitTemplate;
 
-    private RabbitMQProducer(RabbitTemplate rabbitTemplate) {
+    public RabbitMQProducer(RabbitTemplate rabbitTemplate) {
         this.rabbitTemplate = rabbitTemplate;
     }
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(RabbitMQProducer.class);
-
-    public void sendMailAddressToQueue(String mail){
-        LOGGER.info(String.format("Message sent -> %s",mail));
-        rabbitTemplate.convertAndSend(exchange,routingKey,mail);
+    public void sendMessage(String message){
+        LOGGER.info(String.format("Message sent -> %s",message));
+        rabbitTemplate.convertAndSend(exchange,routingKey,message);
     }
 
+    public void sendEmailMessage(Patient patient, Long id, String subject) {
+        Map<String, Object> mailData = Map.of("patientId", patient.getPatientId(), "fullName", patient.getFirstName()+" "+patient.getSurname());
+
+        rabbitTemplate.convertAndSend(exchange, routingKey, EmailDetailDto.builder()
+                .to(patient.getEmail())
+                .subject(subject)
+                .dynamicValue(mailData)
+                .templateName("verification")
+                .build());
+    }
 
 
 }

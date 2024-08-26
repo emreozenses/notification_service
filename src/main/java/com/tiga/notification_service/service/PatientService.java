@@ -1,8 +1,6 @@
 package com.tiga.notification_service.service;
 
-import com.tiga.notification_service.dto.PatientQueryResponse;
 import com.tiga.notification_service.entity.Patient;
-import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
@@ -19,4 +17,6 @@ public interface PatientService {
     Patient delete(long patientId);
 
     void deleteDuplicatePatient();
+
+    List<Patient> findMaleAndNotificationEMAIL();
 }

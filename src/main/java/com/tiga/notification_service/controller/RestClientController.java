@@ -5,18 +5,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tiga.notification_service.entity.Patient;
 import com.tiga.notification_service.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
-import javax.swing.text.html.parser.Entity;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/test")
@@ -41,7 +36,7 @@ public class RestClientController {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
-        ObjectMapper mapper = new ObjectMapper(); // or inject it as a dependency
+        ObjectMapper mapper = new ObjectMapper();
         List<Patient> pojos = mapper.convertValue(responseBody, new TypeReference<List<Patient>>() { });
 
         for (Patient pojo : pojos) {
