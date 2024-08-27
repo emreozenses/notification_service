@@ -48,8 +48,8 @@ public class PatientServiceImpl implements PatientService{
     }
 
     @Override
-    public List<Patient> findMaleAndNotificationEMAIL() {
-        return patientRepository.findMaleAndNotificationEMAIL();
+    public List<Patient> sendProstateCancerScreeningEMAIL() {
+        return patientRepository.sendProstateCancerScreeningEMAIL();
     }
 
 

@@ -43,7 +43,7 @@ public class MailController {
         this.restTemplate = restTemplate;
     }
 
-    @PostMapping("/send")
+    @PostMapping("/sendProstate")
     public ResponseEntity<List<Patient>> sendMail() throws MessagingException {
         ResponseEntity<List> result = restTemplate.getForEntity(getUrl, List.class);
         responseBody = result.getBody();
@@ -60,10 +60,10 @@ public class MailController {
         patientService.deleteDuplicatePatient();
 
         List<Patient> patientList = new ArrayList<>();
-        patientList.addAll(patientService.findMaleAndNotificationEMAIL());
+        patientList.addAll(patientService.sendProstateCancerScreeningEMAIL());
 
         patientList.forEach(patient -> {
-            rabbitMQProducer.sendEmailMessage(patient,patient.getId(),"verification");
+            rabbitMQProducer.sendEmailMessage(patient,patient.getId(),"Prostat Taraması");
                 });
 
         return ResponseEntity.ok(patientList);

@@ -67,7 +67,7 @@ public class MailServiceImpl implements MailService{
     }
 
     public String loadEmailTemplate (String templateName){
-        ClassPathResource resource = new ClassPathResource("templates/emails/" + templateName + ".html");
+        ClassPathResource resource = new ClassPathResource("templates/" + templateName + ".html");
         try{
             return StreamUtils.copyToString(resource.getInputStream(), StandardCharsets.UTF_8);
         } catch (IOException e) {

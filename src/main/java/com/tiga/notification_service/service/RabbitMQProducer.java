@@ -39,7 +39,7 @@ public class RabbitMQProducer {
                 .to(patient.getEmail())
                 .subject(subject)
                 .dynamicValue(mailData)
-                .templateName("verification")
+                .templateName("prostate")
                 .build());
     }
 

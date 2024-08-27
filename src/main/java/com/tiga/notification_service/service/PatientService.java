@@ -18,5 +18,5 @@ public interface PatientService {
 
     void deleteDuplicatePatient();
 
-    List<Patient> findMaleAndNotificationEMAIL();
+    List<Patient> sendProstateCancerScreeningEMAIL();
 }

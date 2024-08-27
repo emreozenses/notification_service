@@ -16,6 +16,6 @@ public interface PatientRepository extends JpaRepository<Patient,Long> {
 
     @Modifying
     @Transactional
-    @Query(value = "SELECT * FROM patients WHERE gender='MALE'AND notification_preferences='EMAIL'AND age>60 ",nativeQuery = true)
-    List<Patient> findMaleAndNotificationEMAIL();
+    @Query(value = "SELECT * FROM patients WHERE gender='MALE'AND notification_preferences='EMAIL'AND age>40 ",nativeQuery = true)
+    List<Patient> sendProstateCancerScreeningEMAIL();
 }
